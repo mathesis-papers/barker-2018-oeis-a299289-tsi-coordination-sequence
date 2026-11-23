@@ -1,0 +1,412 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\dist}{\operatorname{dist}}
+\title{Prism-stack shell bounds and proofs of\\Barker's and Spezia's conjectures}
+\author{Haobo Ma\\\small ChronoAI Pte Ltd, Singapore
+\and Wenlin Zhang\\\small National University of Singapore\\\small ChronoAI Pte Ltd, Singapore}
+\date{November 16, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Extending Deza and Shtogrin's scale-two metric description
+\cite[Tables 3--4]{deza} to exact shell enumeration, we prove
+Colin Barker's conjectures in the formula block of OEIS A299289,
+revision 16 (formulas dated February 11, 2018), and Stefano Spezia's conjectured exponential
+generating function in the same block (June 8, 2024), by expressing distance
+in the alternating-prism tiling as layer distance plus distance to an
+integer rectangle.
+The shell counts are $a(0)=1$ and $2a(n)=13n^2+4$ for positive even $n$,
+or $13n^2+3$ for odd $n$.
+They imply all of Barker's partial-sum conjectures in A299290,
+revision 10, formula block (February 11, 2018).
+For arbitrary stacks of square-faced triangular-prism slabs, the metric
+gives sharp shell bounds; a nonalternating stack can have the same
+coordination sequence at one center but a different sequence at another.
+\end{abstract}
+
+\section{The tiling and its graph}
+The sequence in A299289~\cite{oeis} counts vertices at a prescribed graph
+distance in the uniform tiling \texttt{tsi}. Its initial values were
+computed by Davide M. Proserpio with ToposPro. Barker proposed exact
+formulas for the shells and for their partial sums~\cite{balls}; Spezia
+later proposed an exponential generating function. We obtain these
+identities from the sizes of rectangle shells, rather than extending a
+finite enumeration.
+The source calls Barker's formulas ``Conjectures'' and Spezia's formula
+``Conjectured e.g.f.''; the exact lines are identified in the coverage table.
+General automata methods establish rationality for periodic graphs
+\cite{kopczynski}, whereas the rectangle metric here gives the specific
+coefficients directly and also applies to stacks without periodicity.
+The metric framework has an earlier source: Deza and Shtogrin
+\cite[Table 3, row 27; Table 4, row 32; \S5]{deza} give scale-two
+$\ell^1$ embeddings of both the alternating and the general prism stacks.
+We give explicit coordinates and use them for shell enumeration and bounds.
+Spezia's general OGF--EGF conversion argument~\cite{spezia} explains
+the relation between the two series; identifying their coefficients with
+the graph-distance shells is the combinatorial step proved here.
+
+The relevant geometry is Gr\"unbaum's tiling 12: slabs of regular
+triangular prisms with square boundary faces, with adjacent slab
+orientations differing by $90^\circ$~\cite[pp.~52,55]{grunbaum}.
+Here is an explicit coordinate model. The graph $G$ has vertices
+$(i,j,k)\in\Z^3$. Within each layer $k$, edges are the unit steps in
+$i$ or $j$. The upward neighbors of $(i,j,k)$ are
+\[
+ (i,j,k+1),\qquad
+ \begin{cases}(i+1,j,k+1),&k\text{ even},\\
+ (i,j+1,k+1),&k\text{ odd}.
+ \end{cases}                                                    \tag{1}
+\]
+All edges are undirected. Put
+\[
+ \alpha_k=\left\lfloor\frac{k+1}{2}\right\rfloor,\qquad
+ \beta_k=\left\lfloor\frac{k}{2}\right\rfloor.
+\]
+These are floor divisions also for negative $k$.
+The Euclidean realization
+\[
+ (i,j,k)\longmapsto
+ \left(i-\frac{\alpha_k}{2},\ j-\frac{\beta_k}{2},\ \frac{\sqrt3}{2}k\right)
+                                                                  \tag{2}
+\]
+identifies this graph with the tiling's edge graph. Indeed, in an even
+slab the upper square grid is shifted by half a unit in the first
+direction. The triangles between adjacent horizontal rows are
+equilateral, and extrusion through a unit interval in the second
+direction gives regular triangular prisms. The odd slabs interchange
+the two horizontal directions. Each slab is filled face-to-face by
+these prisms, its boundary is a square grid, and its edges are exactly
+(1) and the horizontal edges. This is the alternating square-faced
+prism construction of tiling 12.
+
+Let $a(n)$ be the number of vertices at distance $n$ from the origin,
+and let $b(n)=\sum_{r=0}^n a(r)$.
+
+\section{An exact metric and the shell formula}
+For integers $c,t$, let $I_c$ be the integer interval with endpoints
+$0,c$, and write
+\[
+ \delta_c(t)=\max(0,\min(0,c)-t)+\max(0,t-\max(0,c)).
+\]
+Thus $\delta_c(t)$ is the distance from $t$ to $I_c$.
+
+\begin{theorem}\label{main}
+For every $(i,j,k)\in\Z^3$,
+\[
+ \dist_G((0,0,0),(i,j,k))
+ =|k|+\delta_{\alpha_k}(i)+\delta_{\beta_k}(j).                 \tag{3}
+\]
+The graph is vertex-transitive, $a(0)=1$, and at every center
+\[
+ a(n)=\begin{cases}
+ (13n^2+4)/2,&n>0\text{ even},\\
+ (13n^2+3)/2,&n\text{ odd}.
+ \end{cases}                                                    \tag{4}
+\]
+\end{theorem}
+\begin{proof}
+First observe the elementary identity
+\[
+ H(c,t):=|c|+\delta_c(t)=\max\{|c|,|t|,|t-c|\}.                \tag{5}
+\]
+It follows by considering $t$ below, inside or above the interval
+$I_c$. Since $|\alpha_k|+|\beta_k|=|k|$, the right side $D(i,j,k)$
+of (3) equals $H(\alpha_k,i)+H(\beta_k,j)$.
+A horizontal edge changes one $t$ by one, so changes $D$ by at most
+one. Across an even upward slab, $(\alpha_k,i)$ changes to
+$(\alpha_k+1,i+\varepsilon)$, where $\varepsilon=0$ or $1$, while
+$(\beta_k,j)$ is fixed. Each of the three absolute values in (5)
+changes by at most one. The odd slab has the identical argument in
+the second coordinate. Hence $D$ changes by at most one across every
+edge. As $D(0,0,0)=0$, every walk to $(i,j,k)$ has length at least $D(i,j,k)$.
+
+For the reverse inequality, take a path monotone in the layer index
+from $0$ to $k$. If $k\geq0$, there are $\alpha_k$ first-direction
+choices and $\beta_k$ second-direction choices of a shifted upward
+edge. Choosing any number of these shifts reaches every pair in
+$I_{\alpha_k}\times I_{\beta_k}$ after exactly $k$ steps. If $k<0$,
+the downward shifted edges subtract one; there are $|\alpha_k|$ and
+$|\beta_k|$ such choices, reaching every pair in the same rectangle
+after $|k|$ steps. Select a closest pair to $(i,j)$ in that rectangle
+and finish with horizontal edges. This takes exactly $D(i,j,k)$ steps,
+proving (3), connectedness, and finiteness of every sphere.
+
+To count a sphere, consider more generally a rectangle
+$I_c\times I_e$, with side lengths $u=|c|$, $v=|e|$ in edge units.
+The number of integer pairs satisfying
+$\delta_c(i)+\delta_e(j)=d$ is
+\[
+ R_{u,v}(d)=\begin{cases}
+ (u+1)(v+1),&d=0,\\
+ 2(u+v)+4d,&d\geq1.
+ \end{cases}                                                    \tag{6}
+\]
+For $d>0$, the two cases in which one gap is zero contribute
+$2(u+1)+2(v+1)$ pairs. Each of the $d-1$ ways to have both gaps
+positive contributes four. This also covers zero side lengths.
+
+For $n\geq1$, layers $|k|>n$ contribute nothing. In an interior
+layer $|k|<n$, (6) gives
+\[
+ 2|k|+4(n-|k|)=4n-2|k|.
+\]
+The two extreme layers $k=\pm n$ contribute
+$2(\lfloor n/2\rfloor+1)(\lceil n/2\rceil+1)$ in total.
+Since $\sum_{|k|<n}|k|=n(n-1)$, summation yields
+\[
+ a(n)=6n^2-2n+
+       2(\lfloor n/2\rfloor+1)(\lceil n/2\rceil+1).             \tag{7}
+\]
+Substituting $n=2m$ or $n=2m+1$ gives (4). Formula (3) also shows
+that the radius-zero sphere contains exactly the origin.
+
+Finally, horizontal integer translations and
+$F(i,j,k)=(j,i,k+1)$ are graph automorphisms. In (1), $F$ swaps
+the horizontal directions and reverses the parity selecting the shifted
+edge; its inverse is $(i,j,k)\mapsto(j,i,k-1)$.
+Powers of $F$ reach every layer, and translations reach every vertex
+within it. Sphere sizes therefore do not depend on the center.
+\end{proof}
+
+\section{Generating functions and partial sums}
+\begin{corollary}\label{series}
+As formal power series,
+\begin{align}
+ A(z):=\sum_{n\geq0}a(n)z^n
+ &=\frac{1+6z+12z^2+6z^3+z^4}{(1-z)^3(1+z)},                 \tag{8}\\
+ E(t):=\sum_{n\geq0}a(n)\frac{t^n}{n!}
+ &=\frac{(4+13t+13t^2)\cosh t+(3+13t+13t^2)\sinh t-2}{2}.   \tag{9}
+\end{align}
+Moreover, $a(n)=2a(n-1)-2a(n-3)+a(n-4)$ for $n\geq5$.
+\end{corollary}
+\begin{proof}
+For every $n\geq0$ we can write
+\[
+ a(n)=\frac{13}{2}n^2+\frac74+\frac14(-1)^n-\mathbf1_{n=0}.
+                                                                  \tag{10}
+\]
+Using $\sum n^2z^n=z(1+z)/(1-z)^3$, the ordinary series is
+\[
+ A(z)=\frac{13z(1+z)}{2(1-z)^3}+\frac7{4(1-z)}+
+       \frac1{4(1+z)}-1.
+\]
+Reduction to a common denominator gives (8).
+Its denominator is $1-2z+2z^3-z^4$, so comparison of coefficients
+above degree four gives the stated recurrence. The initial terms are
+$1,8,28,60,106$; the recurrence does not extend to $n=4$, where its
+right side would be $105$.
+For the exponential series, use
+$\sum n^2t^n/n!=(t^2+t)e^t$ in (10). This gives
+\[
+ E(t)=\frac{(26t^2+26t+7)e^t+e^{-t}-4}{4},
+\]
+which equals (9) on replacing $e^{\pm t}$ by $\cosh t\pm\sinh t$.
+\end{proof}
+
+\begin{corollary}\label{partial}
+For every integer $n\geq0$,
+\[
+ b(n)=\begin{cases}
+ (26n^3+39n^2+34n+12)/12,&n\text{ even},\\
+ (26n^3+39n^2+34n+9)/12,&n\text{ odd}.
+ \end{cases}                                                    \tag{11}
+\]
+Its ordinary generating function is
+\[
+ B(z)=\frac{1+6z+12z^2+6z^3+z^4}{(1-z)^4(1+z)},             \tag{12}
+\]
+and, for $n\geq5$,
+\[
+ b(n)=3b(n-1)-2b(n-2)-2b(n-3)+3b(n-4)-b(n-5).              \tag{13}
+\]
+\end{corollary}
+\begin{proof}
+Summing (10), with
+$\sum_{r=0}^n r^2=n(n+1)(2n+1)/6$ and
+$\sum_{r=0}^n(-1)^r=(1+(-1)^n)/2$, gives
+\[
+ b(n)=\frac{13n(n+1)(2n+1)}{12}+
+       \frac{7(n+1)}4+\frac{1+(-1)^n}{8}-1.
+\]
+Expansion proves (11), including $b(0)=1$.
+Finite coefficient summation gives $B(z)=A(z)/(1-z)$, proving (12).
+The denominator is $1-3z+2z^2+2z^3-3z^4+z^5$; coefficient comparison
+for $n\geq5$ proves (13). These are precisely the three formulas
+proposed in A299290~\cite{balls}.
+\end{proof}
+
+\section{Arbitrary slab orientations}
+The same calculation applies when slab directions need not alternate.
+Choose any bi-infinite sequence $\varepsilon_k\in\{1,2\}$, and replace
+the shifted upward edge in (1) by a shift in coordinate
+$\varepsilon_k$. Let $c_0=d_0=0$ and define the integer sequences by
+\[
+ c_{k+1}-c_k=\mathbf1_{\varepsilon_k=1},\qquad d_k=k-c_k
+ \quad(k\in\Z).
+\]
+This graph is the edge graph of a stack of the same square-faced prism
+slabs; it need not be a uniform tiling.
+
+\begin{corollary}\label{stacks}
+In this graph the distance to $(i,j,k)$ is
+$|k|+\delta_{c_k}(i)+\delta_{d_k}(j)$.
+For $n\geq1$, its origin shell size $s(n)$ is
+\begin{align}
+ s(n)&=6n^2-2n+(|c_n|+1)(|d_n|+1)
+                     +(|c_{-n}|+1)(|d_{-n}|+1), \tag{14}\\
+ 6n^2+2&\leq s(n)\leq a(n). \tag{15}
+\end{align}
+Both bounds are attained at every radius by fixed choices of the stack.
+The same formula holds about any center after shifting the layer origin
+and the horizontal coordinates to that center.
+An explicit scale-two embedding is
+\[
+ \Phi(i,j,k)=(k,i,i-c_k,j,j-d_k)\in\Z^5,
+ \qquad \|\Phi(p)-\Phi(q)\|_1=2\dist(p,q).
+\]
+\end{corollary}
+\begin{proof}
+We have $|c_k|+|d_k|=|k|$. Thus the metric candidate is
+$H(c_k,i)+H(d_k,j)$. Each edge changes one of its two summands by
+at most one, exactly as in (5). A monotone layer path reaches every
+point of $I_{c_k}\times I_{d_k}$; completing horizontally attains the
+candidate. The interior-layer count is still $4n-2|k|$, giving
+$6n^2-2n$ after summation; the two extreme rectangles give (14).
+For nonnegative integers $u,v$ with $u+v=n$,
+\[
+ n+1\leq(u+1)(v+1)
+ \leq(\lfloor n/2\rfloor+1)(\lceil n/2\rceil+1).
+\]
+Indeed the product is $n+1+uv$, minimized at $uv=0$ and maximized
+when $|u-v|\leq1$. Apply this to both extreme rectangles and use (7).
+Constant orientations attain the lower bound; alternating orientations
+attain the upper. Translating a center to $(0,0,0)$ replaces
+$\varepsilon_k$ by the correspondingly shifted sequence, so the
+same proof applies there.
+For the final identity use
+$2H(c,t)=|c|+|t|+|t-c|$ in each coordinate, and note that
+$|c_k-c_l|+|d_k-d_l|=|k-l|$. This proves the displayed
+embedding for every pair of vertices, recovering the earlier
+embeddability statements in~\cite{deza}.
+\end{proof}
+
+For a constant orientation the lower bound recovers the known sequence
+$h(0)=1$, $h(n)=6n^2+2$ for $n>0$ of the triangular-prism tiling
+\texttt{hex} (A005897)~\cite{hex}. Its ball sequence, A005898, is
+\[
+ H(n)=1+\sum_{r=1}^n(6r^2+2)=n^3+(n+1)^3.
+\]
+Writing $P(z)=(1+z)(1+4z+z^2)$, their ordinary generating
+functions are $P(z)/(1-z)^3$ and $P(z)/(1-z)^4$.
+Their exponential generating functions are
+$(2+6t+6t^2)e^t-1$ and $(1+8t+9t^2+2t^3)e^t$.
+These identities follow by summing $n^2$ or $n^3$ as in
+Corollaries~\ref{series}--\ref{partial}; they recover existing formulas,
+not further conjectures. Multiplying by the displayed denominators
+also recovers the order-three recurrence for $h$ from $n=4$ and the
+order-four recurrence for $H$ from $n=4$ recorded in those entries.
+
+The shell sequence does not characterize the alternating stack.
+Use the repeating slab word $(1,2,2,1)$, beginning at layer zero.
+Every prefix on either side of layer zero contains nearly equal
+numbers of the two directions:
+each pair of consecutive slabs in those prefixes uses both directions.
+Both extreme products in (14) are therefore maximal for every $n$,
+and $s(n)=a(n)$. At a center in layer one, however, the two slabs
+above have directions $(2,2)$ and those below have directions $(1,1)$.
+At radius two (14) gives $24-4+3+3=26$, instead of $a(2)=28$.
+This nonuniqueness statement is not a conjecture posed in the source.
+
+\section{Coverage and verification}
+The pinned Lean declaration \texttt{result} in~\cite{lean} proves (4)
+for the graph (1), at center $(0,0,0)$.
+Its supporting lemmas establish the distance and layer-count identities.
+The Euclidean identification (2), independence of center, generating
+functions, ball formulas, and arbitrary-stack results have written
+proofs above; they are not additional conclusions of \texttt{result}.
+\begin{center}
+\small
+\begin{tabular}{@{}p{.48\linewidth}p{.43\linewidth}@{}}
+\toprule
+Source statement & Coverage here\\
+\midrule
+A299289 r16, \texttt{\%F} block lines 14--18: Barker's parity formulas & Proved, Theorem~\ref{main}; origin formulas in Lean \texttt{result}\\
+A299289 r16, lines 14--18: Barker's ordinary series and recurrence & Proved, Corollary~\ref{series}\\
+A299289 r16, line 19: Spezia's exponential series & Proved, Corollary~\ref{series}\\
+A299290 r10, lines 11--16: Barker's partial-sum formulas, series and recurrence & Proved, Corollary~\ref{partial}\\
+Prism-stack scale-two $\ell^1$ embeddings & Reproved explicitly; prior proof Deza--Shtogrin (1999/2000)\\
+Arbitrary-stack shell bounds and nonuniqueness, not posed in OEIS & Proved, Corollary~\ref{stacks} and its example\\
+A005897 and A005898: \texttt{hex} shell/ball formulas and series & Prior formulas cited; recovered from Corollary~\ref{stacks}\\
+Other cross-referenced tilings besides \texttt{hex} and \texttt{tsi} & Not covered\\
+\bottomrule
+\end{tabular}
+\end{center}
+Line numbers refer to the complete plain-text responses linked in
+\cite{oeis,balls}, including their introductory headers.
+The exact-integer and rational Python checker supplies finite checks
+of the graph metric, formulas, series and slab-stack examples; its
+README and JSON output specify all ranges. The all-radius arguments
+are the proofs above.
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{oeis}
+N. J. A. Sloane, \emph{Coordination sequence for ``tsi'' 3D uniform tiling},
+The On-Line Encyclopedia of Integer Sequences, A299289, revision 16,
+June 8, 2024. Formulas of Colin Barker (February 11, 2018) and
+Stefano Spezia (June 8, 2024).
+\url{https://oeis.org/A299289}.
+\href{https://oeis.org/search?q=id:A299289\&fmt=text}{Plain-text formula block}.
+\bibitem{balls}
+N. J. A. Sloane, \emph{Partial sums of A299289},
+The On-Line Encyclopedia of Integer Sequences, A299290, revision 10,
+February 12, 2018. Formulas of Colin Barker (February 11, 2018).
+\url{https://oeis.org/A299290}.
+\href{https://oeis.org/search?q=id:A299290\&fmt=text}{Plain-text formula block}.
+\bibitem{grunbaum}
+B. Gr\"unbaum, \emph{Uniform tilings of 3-space},
+Geombinatorics \textbf{4} (1994), 49--56; tiling 12 and slab $S_{14}$.
+\href{https://faculty.washington.edu/moishe/branko/BG199.Uniform\%20Tilings\%20of\%203-Space.pdf}{Author's article}.
+\bibitem{deza}
+M. Deza and M. I. Shtogrin, \emph{Uniform partitions of 3-space,
+their relatives and embedding}, European Journal of Combinatorics
+\textbf{21} (2000), 807--814.
+\href{https://doi.org/10.1006/eujc.1999.0385}{doi:10.1006/eujc.1999.0385}.
+Preprint arXiv:math/9906034v1, June 6, 1999, Tables 3--4 and \S5.
+\url{https://arxiv.org/abs/math/9906034v1}.
+\bibitem{kopczynski}
+E. Kopczy\'nski, \emph{Coordination Sequences of Periodic Structures
+are Rational via Automata Theory}, Acta Crystallographica A
+\textbf{78} (2022), 155--157. Theorem 4 and Corollary 5 in the
+author's version arXiv:2307.15803v1 (2023).
+\href{https://doi.org/10.1107/S2053273322000262}{doi:10.1107/S2053273322000262}.
+\url{https://arxiv.org/abs/2307.15803v1}.
+\bibitem{hex}
+The On-Line Encyclopedia of Integer Sequences, A005897, revision 158
+(September 12, 2026), and A005898, revision 140 (October 8, 2026).
+The triangular-prism interpretation in A005897 is credited to
+N. J. A. Sloane (February 6, 2018); the ordinary generating functions
+are credited to Simon Plouffe, and also Colin Barker in A005898.
+\url{https://oeis.org/A005897}; \url{https://oeis.org/A005898}.
+\bibitem{spezia}
+S. Spezia, \emph{Laplace Transforms and the Conversion between Ordinary
+and Exponential Generating Functions}, July 28, 2025, updated
+September 6, 2025, unnumbered theorem and proof.
+\href{https://stefanospezia.altervista.org/laplace-transforms-and-the-conversion-between-ordinary-and-exponential-generating-functions/}{Author's article}.
+\bibitem{lean}
+\emph{TsiCoordinationSequence.lean}, declaration \texttt{result}.
+Fixed source version:
+\href{https://github.com/the-omega-institute/trureturing/blob/6974dba01daa1a25cc74b87a86c191e95fe2c681/D5/S3/StatisticalMechanics/TsiCoordinationSequence.lean}{Pinned Lean source}.
+\end{thebibliography}
+\smallskip
+\noindent\small\textcopyright\ 2026 Haobo Ma and Wenlin Zhang.
+Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+\end{document}

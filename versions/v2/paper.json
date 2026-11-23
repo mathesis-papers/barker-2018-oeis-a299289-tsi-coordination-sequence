@@ -1,0 +1,66 @@
+{
+  "files": {
+    "pdf": {
+      "bytes": 93659,
+      "matches_public": true,
+      "path": "paper.pdf",
+      "public_sha256": "a318c61b97ed81446ea4f956c2e3555bbee6014982457c917f42a63a208b0269",
+      "sha256": "a318c61b97ed81446ea4f956c2e3555bbee6014982457c917f42a63a208b0269"
+    },
+    "source": {
+      "bytes": 16405,
+      "matches_public": true,
+      "path": "source.archive",
+      "public_sha256": "41b275d9a27b33ce440f2f120de3e8cce7bed4f4434deecb948923b534c073e8",
+      "sha256": "41b275d9a27b33ce440f2f120de3e8cce7bed4f4434deecb948923b534c073e8"
+    }
+  },
+  "source_identity": "Mathesis public projection",
+  "work": {
+    "abstract_text": "Extending Deza and Shtogrin's scale-two metric description (1999/2000, Tables 3-4) to exact shell enumeration, we prove Colin Barker's conjectures in the formula block of OEIS A299289, revision 16 (formulas dated February 11, 2018), and Stefano Spezia's conjectured exponential generating function in the same block (June 8, 2024), by expressing distance in the alternating-prism tiling as layer distance plus distance to an integer rectangle. The shell counts are a(0)=1 and 2a(n)=13n^2+4 for positive even n, or 13n^2+3 for odd n. They imply all of Barker's partial-sum conjectures in A299290, revision 10, formula block (February 11, 2018). For arbitrary stacks of square-faced triangular-prism slabs, the metric gives sharp shell bounds; a nonalternating stack can have the same coordination sequence at one center but a different sequence at another.",
+    "authors": [
+      {
+        "affiliation": "ChronoAI Pte Ltd, Singapore",
+        "name": "Haobo Ma"
+      },
+      {
+        "affiliation": "National University of Singapore; ChronoAI Pte Ltd, Singapore",
+        "name": "Wenlin Zhang"
+      }
+    ],
+    "concept_doi": null,
+    "current_version": 2,
+    "doi": null,
+    "lean_source": {
+      "revision": "6974dba01daa1a25cc74b87a86c191e95fe2c681",
+      "url": "https://github.com/the-omega-institute/trureturing/blob/6974dba01daa1a25cc74b87a86c191e95fe2c681/D5/S3/StatisticalMechanics/TsiCoordinationSequence.lean"
+    },
+    "license": "CC-BY-4.0",
+    "msc": [],
+    "pdf": {
+      "bytes": 93659,
+      "sha256": "a318c61b97ed81446ea4f956c2e3555bbee6014982457c917f42a63a208b0269",
+      "url": "/api/v1/collected-papers/barker-2018-oeis-a299289-tsi-coordination-sequence/files/pdf?version=2"
+    },
+    "previous_version": null,
+    "publication": "public",
+    "published_on": "2026-11-23T21:19:41.701074625Z",
+    "record": "barker-2018-oeis-a299289-tsi-coordination-sequence",
+    "repository_name": "barker-2018-oeis-a299289-tsi-coordination-sequence",
+    "source": {
+      "bytes": 16405,
+      "sha256": "41b275d9a27b33ce440f2f120de3e8cce7bed4f4434deecb948923b534c073e8",
+      "url": "/api/v1/collected-papers/barker-2018-oeis-a299289-tsi-coordination-sequence/files/source?version=2"
+    },
+    "title": "Prism-stack shell bounds and proofs of Barker's and Spezia's conjectures",
+    "versions": [
+      {
+        "previous_version": null,
+        "published_on": "2026-11-23T21:19:41.701074625Z",
+        "revision": "2",
+        "version": 2
+      }
+    ],
+    "work": "barker-2018-oeis-a299289-tsi-coordination-sequence"
+  }
+}

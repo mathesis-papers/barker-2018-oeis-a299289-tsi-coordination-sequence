@@ -1,0 +1,31 @@
+{
+  "id": "barker-2018-oeis-a299289-tsi-coordination-sequence",
+  "revision": 2,
+  "problem_ids": ["barker-2018-oeis-a299289-tsi-coordination-sequence"],
+  "topic": "Coordination and ball sequences of the alternating-prism tiling and shell bounds for arbitrary prism stacks",
+  "title": "Prism-stack shell bounds and proofs of Barker's and Spezia's conjectures",
+  "creators": [
+    {"name": "Ma, Haobo", "affiliation": "ChronoAI Pte Ltd, Singapore"},
+    {"name": "Zhang, Wenlin", "affiliation": "National University of Singapore; ChronoAI Pte Ltd, Singapore"}
+  ],
+  "abstract": "Extending Deza and Shtogrin's scale-two metric description (1999/2000, Tables 3-4) to exact shell enumeration, we prove Colin Barker's conjectures in the formula block of OEIS A299289, revision 16 (formulas dated February 11, 2018), and Stefano Spezia's conjectured exponential generating function in the same block (June 8, 2024), by expressing distance in the alternating-prism tiling as layer distance plus distance to an integer rectangle. The shell counts are a(0)=1 and 2a(n)=13n^2+4 for positive even n, or 13n^2+3 for odd n. They imply all of Barker's partial-sum conjectures in A299290, revision 10, formula block (February 11, 2018). For arbitrary stacks of square-faced triangular-prism slabs, the metric gives sharp shell bounds; a nonalternating stack can have the same coordination sequence at one center but a different sequence at another.",
+  "summary": "An exact metric proves the shell and ball formulas, generating functions and recurrences. Arbitrary slab stacks satisfy sharp bounds 6n^2+2 <= s(n) <= a(n). A period-four stack attains the alternating origin sequence at all radii but has 26 instead of 28 radius-two neighbors at another center.",
+  "license": "cc-by-4.0",
+  "date": "2026-11-16",
+  "evidence_url": "https://github.com/the-omega-institute/trureturing/blob/6974dba01daa1a25cc74b87a86c191e95fe2c681/D5/S3/StatisticalMechanics/TsiCoordinationSequence.lean",
+  "coverage": [
+    {"source": "OEIS A299289 revision 16, plain-text lines 14-18, Barker's Conjectures", "status": "proved", "scope": "Theorem 1; Lean result at the origin of tsiGraph"},
+    {"source": "OEIS A299289 revision 16, plain-text lines 14-18, Barker's ordinary series and recurrence", "status": "proved", "scope": "Corollary 2, written proof"},
+    {"source": "OEIS A299289 revision 16, plain-text line 19, Spezia's Conjectured e.g.f.", "status": "proved", "scope": "Corollary 2, written proof"},
+    {"source": "OEIS A299290 revision 10, plain-text lines 11-16, Barker's Conjectures", "status": "proved", "scope": "Corollary 3, written proof"},
+    {"source": "Deza-Shtogrin (1999/2000), Tables 3-4 and section 5, scale-two embeddings of prism stacks", "status": "reproved explicitly; prior proof cited", "scope": "Corollary 4, explicit five-coordinate embedding and written proof"},
+    {"source": "Arbitrary-stack shell bounds and nonuniqueness, not posed in OEIS", "status": "proved", "scope": "Corollary 4 and its period-four example, written proof"},
+    {"source": "OEIS A005897 revision 158 and A005898 revision 140, hex shell/ball formulas and series", "status": "prior formulas cited; recovered", "scope": "Constant-orientation specialization of Corollary 4, written derivation"},
+    {"source": "Other uniform tilings cross-referenced in A299289 besides hex and tsi", "status": "not covered", "scope": "No assertion about their coordination sequences"}
+  ],
+  "verification": {
+    "formal": "D5.S3.StatisticalMechanics.TsiCoordinationSequence.result: the two positive-radius shell formulas at center (0,0,0) for tsiGraph",
+    "written": "Euclidean prism realization, exact metric, shell enumeration, all-center extension, generating functions, recurrences, partial sums, arbitrary-stack metrics and bounds, and period-four nonuniqueness example",
+    "finite": "Exact Python graph search through radius 32; source prefixes; recurrences, partial sums and ordinary series through index 1000; exponential series through index 100; all 1024 orientation assignments to ten slabs through radius 5; period-four origin shells through index 1000"
+  }
+}
