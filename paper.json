@@ -31,6 +31,7 @@
     "concept_doi": "10.5281/zenodo.24482894",
     "current_version": 2,
     "doi": "10.5281/zenodo.24482895",
+    "kind": "note",
     "lean_source": {
       "revision": "6974dba01daa1a25cc74b87a86c191e95fe2c681",
       "url": "https://github.com/the-omega-institute/trureturing/blob/6974dba01daa1a25cc74b87a86c191e95fe2c681/D5/S3/StatisticalMechanics/TsiCoordinationSequence.lean"
@@ -55,10 +56,12 @@
     "title": "Prism-stack shell bounds and proofs of Barker's and Spezia's conjectures",
     "versions": [
       {
+        "changelog": null,
         "previous_version": null,
         "published_on": "2026-11-23T21:19:41.701074625Z",
         "revision": "2",
-        "version": 2
+        "version": 2,
+        "version_label": null
       }
     ],
     "work": "barker-2018-oeis-a299289-tsi-coordination-sequence"
